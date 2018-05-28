@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>    
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">  
+<mapper namespace="blog.mapper.imp.IUserDao">  
+
+    <resultMap id="BaseResultMap" type="blog.bean.User">  
+        <id column="t_id" property="id" jdbcType="VARCHAR"/>  
+        <result column="t_name" property="name" jdbcType="VARCHAR"/>  
+        <result column="t_age" property="age" jdbcType="INTEGER"/>  
+        <result column="t_sex" property="sex" jdbcType="INTEGER"/>  
+        <result column="t_graduateYear" property="graduateYear" jdbcType="VARCHAR"/>  
+        <result column="t_collegeName" property="collegeName" jdbcType="VARCHAR"/>  
+    </resultMap>
+    
+    <select id="selectAllUsers" resultMap="BaseResultMap">  
+        select  
+                *  
+        from  
+            user  
+        where  1=1
+            <if  test="name != null">  
+               and t_name = #{name,jdbcType=VARCHAR}  
+            </if>  
+            <if  test="graduateYear != null">  
+                and t_graduateYear = #{graduateYear,jdbcType=VARCHAR}  
+            </if>  
+    </select>   
+</mapper>
